@@ -9,31 +9,86 @@
 </head>
 
 <body>
-    <header class="main-header">
-        <h1 class="title">LA TV Shows</h1>
-    </header>
-    <div id="card-container">
-        
-    </div>
-    <div class="card" style="display: none;">
-        <div class="card-content">
-            <h2>TV Show Title</h2>
-            <img src="" alt="TV Show Poster">
-            <ul>
-                <li>Bullet Point 1</li>
-                <li>Bullet Point 2</li>
-                <li>Bullet Point 3</li>
-            </ul>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <header>SimpleStrength</header>
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#workouts">Workouts</a></li>
+                </ul>
+            </nav>
+            <div class="header-text">
+                <p>By: Muhammad Sabeel</p>
+                <h1><span>ELEVATE </span>YOUR<br>WORKOUTS<br></h1>
+            </div>
+        </div>
+    </div> 
+ <div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/gymclip.jpeg">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">My Journey</h1>
+                <div class="description" id=" skills">
+                    <p>
+                        My passion for the gym started around age 15 when I would see 
+                        the change it brings to peoples' lives. I started by doing
+                        pushups in my room until I got really good at them. Shortly after, I 
+                        started to the gym with my uncle which introduced me to real workout equipment.
+                        From there, my love for the gym skyrocketed and I found myself joining my highschool 
+                        wrestling team and weight room. Overall I have been familiar with the gym for 
+                        about 4 years, and consistently working out for about 2. 
+                        This website shares some of my current favorite workouts.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="footer">
-        <button onclick="quoteAlert();">
-            Get A Quote!
-        </button>
-        <button onclick="removeLastCard();">
-            Remove A Card!
-        </button>
-    </div>
-</body>
+ </div>
 
+
+ <!-- my workouts  -->
+ <div id="workouts">
+    <div class="container">
+        <h1 class="sub-title">My Workouts</h1>
+        <div class="workouts-list">
+            <div>
+                <h2>Chest</h2>
+                <p>My favorite workouts for the chest muscles</p>
+                <!-- <button onclick="filterWorkouts('Chest')">Chest Workouts</button> -->
+                <a href="#chest">->See Workouts</a>
+            </div>
+            <div>
+                <h2>Back</h2>
+                <p>My favorite workouts for the back muscles</p>
+                <a href="#back">->See Workouts</a>
+            </div>
+            <div>
+                <h2>Shoulders</h2>
+                <p>My favorite workouts to target the Shouler muscles</p>
+                <a href="#shoulders">->See Workouts</a>
+            </div> 
+        </div>
+    </div>
+ </div>
+
+<!-- For dynamic creation -->
+ <div id="workout-container"></div>
+
+ <!-- buttons list -->
+ <div class="button-container">
+    <div>
+        <button id="addWorkoutButton">Add Your Workout</button>
+        <button id="sortAlphabet">Sort Alphabetically</button>
+        <button id="searchWorkout">Search Workout</button>
+        <button id="filterBeginner">Filter Beginner Workouts</button>
+    </div>
+
+ </div>
+
+</body>
 </html>

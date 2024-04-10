@@ -24,71 +24,226 @@
  */
 
 
-const FRESH_PRINCE_URL = "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL = "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL = "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
+const workouts =
+[
+    {
+        category: "Chest",
+        workouts: 
+        [
+            {
+                title: "Bench Press",
+                difficulty: "Intermediate",
+                description: "The Bench Press is one of the most fundamental workouts for chest. It includes strength gain as well as overall chest muscle developement",
+                image: "images/benchflat.webp"
+            },
+            {
+                title: "Incline Dumbbell Press",
+                difficulty: "Beginner",
+                description: "The Incline Dumbell Press provides outstanding developement for upper chest growth. An area that most individuals lack",
+                image: "images/inclinepress.gif"
+            },
+            {
+                title: "Cable Fly's",
+                difficulty: "Beginner/ Intermediate",
+                description: "Cable Fly's provide a great stretch for the chest muscle and help in hitting the chest muscle in more ways than just press movements.",
+                image: "images/high-cable-fly.gif"
+            }
+        ]
+    },
+    {
+        category: "Back",
+        workouts:
+        [
+            {
+                title: "Barbell Row",
+                difficulty: "Intermediate",
+                description: "The Barbell Row is a staple back workout. It ignites strength as well as lots of developement",
+                image: "images/barbellrow.gif"  
+            },
+            {
+                title: "Pull-Ups",
+                difficulty: "Advanced",
+                description: "The Pull Up is the most common workout for back. Beginners might have a hard time hitting this one, but it gets easier as time goes on",
+                image: "images/anim-pull-ups.gif"
+            },
+            {
+                title: "Lat-Pull-Downs",
+                difficulty: "Beginner",
+                description: "The Lat Pulldown sets your lat muscles on fire.It creates those 'wings' in your back.",
+                image: "images/latpull.gif"
+            }
+        ]
+    },
+    {
+        category: "Shoulders",
+        workouts:
+        [
+            {
+                title: "Shoulder Press",
+                difficulty: "Beginner",
+                description: "The Shoulder Press is one of the most fundamental workouts for shoulders. It includes strength gain as well as overall shoulder muscle developement.",
+                image: "images/Arnold-Press.gif"
+            },
+            {
+                title: "Shoulder-Raises",
+                difficulty: "Beginner/ Intermediate",
+                description: "The shoulder raise is an amazing workout that can be done for both the front deltoid and the mid deltoid. It gets heavy quick.",
+                image: "images/raises.webp"
+            },
+            {
+                title: "Rear-Delt Fly's",
+                difficulty: "Intermediate",
+                description: "Rear deltoid muscles are a commonly neglected muslce so hitting this workout will defenitely make you stand out.",
+                image: "images/cable-rear-delt-fly.gif"
+            }
+        ]
+    }
+]
 
-// This is an array of strings (TV show titles)
-let titles = [
-    "Fresh Prince of Bel Air",
-    "Curb Your Enthusiasm",
-    "East Los High"
-];
-// Your final submission should have much more data than this, and 
-// you should use more than just an array of strings to store it all.
+function displayWorkouts(categList) {
+    const workoutsContainer = document.getElementById('workout-container');
 
+    categList.forEach(category => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.id = category.category.toLowerCase();
+        categoryDiv.className = 'category-container';
+        categoryDiv.innerHTML = `<h2>${category.category}</h2>`;
 
-// This function adds cards the page to display the data in the array
-function showCards() {
-    const cardContainer = document.getElementById("card-container");
-    cardContainer.innerHTML = "";
-    const templateCard = document.querySelector(".card");
+        const workoutsTileDiv = document.createElement('div'); // New div for workout tiles
+        workoutsTileDiv.className = 'workout-tiles';
+
+        category.workouts.forEach(workout => {
+            const workoutDiv = document.createElement('div');
+            workoutDiv.className = 'workout-container';
+            workoutDiv.innerHTML = `
+                <h3>${workout.title}</h3>
+                <img src="${workout.image}" alt="${workout.title}">
+                <h4>${workout.difficulty}</h4>
+                <p>${workout.description}</p>
+            `;
+            workoutsTileDiv.appendChild(workoutDiv); // Add to tiles div
+            console.log("Now Displaying", workoutDiv);
+        });
+
+        categoryDiv.appendChild(workoutsTileDiv); // Add tiles div under the category title
+        workoutsContainer.appendChild(categoryDiv);
+    });
+
+}
+
+window.onload = () =>
+{
+    displayWorkouts(workouts);
+    document.getElementById('addWorkoutButton').addEventListener('click', addWorkout);
+    document.getElementById('sortAlphabet').addEventListener('click',sortWorkoutsAlphabetically );
+    document.getElementById('searchWorkout').addEventListener('click',searchWorkouts );
+    document.getElementById('filterBeginner').addEventListener('click', filterBeginner);
+} 
+
+function addWorkout()
+{
+    //Asking user input to create a new workout
+    const category = prompt("Enter Category: ");
+    if(!category) return;
+
+    const title = prompt("Enter Workout Title: ");
+    if(!title) return;
     
-    for (let i = 0; i < titles.length; i++) {
-        let title = titles[i];
+    const difficulty = prompt("Enter Difficulty Level: ")
+    if(!difficulty) return;
 
-        // This part of the code doesn't scale very well! After you add your
-        // own data, you'll need to do something totally different here.
-        let imageURL = "";
-        if (i == 0) {
-            imageURL = FRESH_PRINCE_URL;
-        } else if (i == 1) {
-            imageURL = CURB_POSTER_URL;
-        } else if (i == 2) {
-            imageURL = EAST_LOS_HIGH_POSTER_URL;
-        }
+    const description = prompt("Enter Workout Description: ");
+    if(!description) return;
 
-        const nextCard = templateCard.cloneNode(true); // Copy the template card
-        editCardContent(nextCard, title, imageURL); // Edit title and image
-        cardContainer.appendChild(nextCard); // Add new card to the container
+
+    const image = prompt("Enter Image URL(optional- Leave empty): ");
+
+    //making a workout object
+    const newWorkout =
+    {
+        title,
+        description,
+        image: image || "images/gymclip.jpeg"
+    }
+
+    console.log("Creating new workout: ", newWorkout);
+
+    //finding the correct category for the workout
+    const categIndex = workouts.findIndex(c => c.category.toLowerCase() === category.toLowerCase());
+    if(categIndex !== -1)
+    {
+        //if the category exists, add the workout to the category
+        workouts[categIndex].workouts.push(newWorkout);
+        appendWorkoutToDOM(newWorkout, workouts[categIndex].category.toLowerCase());
+        console.log("Workout added: ", newWorkout);
+    }
+    else
+    {
+        // if the category doesn't exist, create a new category and add the new workout as well
+        const newCategory = { category, workouts: [newWorkout]};
+        workouts.push(newWorkout);
+        displayWorkouts([newCategory]);
+        console.log("Category added:", newCategory);
+    }  
+    
+}
+
+//To add the workout to the specific category
+function appendWorkoutToDOM(workout, categoryID)
+{
+    const categoryDiv = document.getElementById(categoryID);
+
+    if(!categoryDiv)
+    {
+        return;
+    }
+
+    const workoutDiv = document.createElement('div');
+    workoutDiv.className = "workout-container";
+    workoutDiv.innerHTML = 
+    `
+    <h3>${workout.title}</h3>
+    <img src="${workout.image}" alt="${workout.title}">
+    <h4>${workout.difficulty}</h4>
+    <p>${workout.description}</p>
+    `;    
+
+    const workoutsTileDiv = categoryDiv.querySelector('.workout-tiles');
+    if(workoutsTileDiv)
+    {
+        workoutsTileDiv.appendChild(workoutDiv);
     }
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-    card.style.display = "block";
-
-    const cardHeader = card.querySelector("h2");
-    cardHeader.textContent = newTitle;
-
-    const cardImage = card.querySelector("img");
-    cardImage.src = newImageURL;
-    cardImage.alt = newTitle + " Poster";
-
-    // You can use console.log to help you debug!
-    // View the output by right clicking on your website,
-    // select "Inspect", then click on the "Console" tab
-    console.log("new card:", newTitle, "- html: ", card);
+function sortWorkoutsAlphabetically() {
+    workouts.forEach(category => {
+        category.workouts.sort((a, b) => a.title.localeCompare(b.title));
+    });
+    displayWorkouts(workouts);
 }
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
+function searchWorkouts()
+{
+    const key = prompt("Enter a keyword to search for workouts");
+    const lowerKey = key.toLowerCase();
+    const searchedCategories = workouts.map(category => 
+    ({
+        ...category,
+        workouts: category.workouts.filter(workouts => workouts.title.toLowerCase().includes(lowerKey))
+    })).filter(category => category.workouts.length > 0);
+    console.log("Searched: ", key, "\nFound: ", searchedCategories);
 
-function quoteAlert() {
-    console.log("Button Clicked!")
-    alert("I guess I can kiss heaven goodbye, because it got to be a sin to look this good!");
+    displayWorkouts(searchedCategories);
 }
 
-function removeLastCard() {
-    titles.pop(); // Remove last item in titles array
-    showCards(); // Call showCards again to refresh
+function filterBeginner()
+{
+    const begCategories = workouts.map(category => 
+    ({
+        ...category, 
+        workouts: category.workouts.filter(workout => workout.difficulty.toLowerCase() === 'beginner')
+    })).filter(category => category.workouts.length > 0);
+    console.log("Displaying beginner workouts: ", begCategories);
+
+    displayWorkouts(begCategories);
 }

@@ -1,70 +1,392 @@
-html,
-body {
+*{
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
 }
 
-.main-header {
-    background-color: rgba(0, 0, 0, .3);
-    padding-bottom: 10px;
+html
+{
+    scroll-behavior: smooth;
+} 
+
+body
+{
+    background:#000;
+    color:aliceblue ;
 }
 
-.title {
-    text-align: center;
-    margin: 0;
-    font-size: 8em;
-    font-family: "Helvetica";
-    font-weight: normal;
-    color: white;
+#header
+{
+    width: 100%;
+    height: 100vh;
+    background-image: url(images/background2.webp);
+    background-size: cover;
+    background-position: center;
 }
 
-#card-container {
+.container
+{
+    padding: 10px 10%;
+}
+
+.container header
+{
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 2rem;
+}
+nav
+{
+    /* display-flex makes the navigation bar text side by side */
+    display: flex;      
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.logo
+{
+    width: 140px;
+}
+
+nav ul li
+{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a
+{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+}
+
+nav ul li a::after
+{
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after
+{
+    width: 100%;
+
+}
+
+.header-text
+{
+    margin-top: 20%;
+    font-size: 30px;
+}
+.header-text h1
+{
+    font-size: 60px;
+    margin-top: 20px;
+}
+.header-text h1 span
+{
+    color: #8e0505;
+    text-shadow: black 0px 0px 2px;
+}
+/* second section */
+#about
+{
+    padding: 90px 0;
+    color: #fbfbfb87;
+}
+.row
+{
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.about-col-1
+{
+    flex-basis: 35%;
+    /* ^^ width of the column */
+}
+
+.about-col-1 img
+{
+    width: 100%;
+    border-radius: 15px;
+}
+
+.about-col-2
+{
+    flex-basis: 60%;
+}
+
+.description
+{
+    margin-top: 2.5rem;
+    line-height: 1.5rem;
+}
+
+.sub-title
+{
+    font-size: 60px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tab-titles
+{
     display: flex;
+    margin: 20px 0 40px;
+}
+
+.tab-links
+{
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+}
+.tab-links::after
+{
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    transition: 0.5s;
+}
+
+.tab-links.active-link::after
+{
+    width: 50%;
+}
+
+.tab-links ul li
+{
+    list-style: none;
+    margin: 10px 0;
+}
+
+.tab-contents ul li span
+{
+    color: #e614a0;
+    font-size: 14px;
+}
+
+.tab-contents
+{
+    display: none;
+}
+
+.tab-contents.active-tab
+{
+    display: block;
+}
+
+
+/* WORKOUTS SECTION */
+#workouts
+{
+    padding: 30px 0;
+}
+.workouts-list
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+.workouts-list div
+{
+    background: #262626;
+    padding: 40px;
+    font-size: 18px;
+    font-weight: 300;
+    border-radius: 10px;
+    transition: background 0.5s, transform 0.5s;
+}
+.workouts-list div h2
+{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.workouts-list div a
+{
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    margin-top: 20px;
+    display: inline-block;
+    transition: 0.3s;
+}
+ 
+.workouts-list div:hover
+{
+    text-decoration: none;
+    background: #ff004f;
+    transform: translateY(-10px);
+}
+
+.workouts-list div a:hover
+{
+    color: #000;
+}
+
+/* ---------------------JAVASCRIPT CSS EDITING---------------------- */
+.category-container
+{
+    display: flex;
+    flex-direction: column; /* This makes the contents stack vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+    margin-left: 0;
+    margin-top: 50px;
+}
+
+.workout-tiles
+{
+    display: grid;
+    margin-left: 200px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 40px;
+    width: 80%;
+    margin-top: 50px;
+    
+}
+
+.category-container h2
+{
+    margin-top: 3rem;
+    margin-left: 12rem;
+    margin-bottom: 15px;
+}
+
+.workout-container
+{
+    background: #262626;
     justify-content: center;
-    margin: 20px;
+    padding: 40px;
+    font-size: 18px;
+    font-weight: 300;
+    border-radius: 10px;
 }
 
-.card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 5px;
-}
-
-.card-content {
-    padding: 20px;
-    font-family: "Verdana";
-    color: #777;
-}
-
-.card-content h2 {
-    margin-top: 0;
-    font-size: 20px;
-}
-
-.card img {
+.workout-container img
+{
+    margin: 10px auto;
+    border-radius: 4px;
+    max-width: 100%;
     width: 100%;
     height: auto;
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, .3);
-    padding: 10px;
+.workout-container p
+{
+    font-size: 16px;
 }
 
-button {
-    text-align: center;
-    background-color: #666;
-    border: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 40px;
-    border-radius: 10px;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    margin: 5px;
+/* BUTTONS */
+
+.button-container 
+{
+    display: flex; 
+    justify-content: center; 
+    width: 100%; 
+    margin: 2rem 2rem;
+    transition: background 0.5 ease, transform 0.5 ease;
 }
+
+
+
+#addWorkoutButton 
+{
+    margin: 20px 20px;
+    background-color: #262626;
+    border: none;
+    padding: 20px 40px; /* Adjust padding to increase button size */
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.5 ease, transform 0.5 ease;
+}
+
+#addWorkoutButton:hover
+{
+    text-decoration: none;
+    background: #ff004f;
+    transform: translateY(-10px);
+}
+#sortAlphabet 
+{
+    margin: 20px 20px;
+    background-color: #262626;
+    border: none;
+    padding: 20px 40px; /* Adjust padding to increase button size */
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.5 ease, transform 0.5 ease;
+}
+
+#sortAlphabet:hover
+{
+    text-decoration: none;
+    background: #ff004f;
+    transform: translateY(-10px);
+}
+
+#searchWorkout
+{
+    margin: 20px 20px;
+    background-color: #262626;
+    border: none;
+    padding: 20px 40px; /* Adjust padding to increase button size */
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.5 ease, transform 0.5 ease;
+}
+
+#searchWorkout:hover
+{
+    text-decoration: none;
+    background: #ff004f;
+    transform: translateY(-10px);
+}
+
+
+#filterBeginner
+{
+    margin: 20px 20px;
+    background-color: #262626;
+    border: none;
+    padding: 20px 40px; /* Adjust padding to increase button size */
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.5 ease, transform 0.5 ease;
+}
+
+#filterBeginner:hover
+{
+    text-decoration: none;
+    background: #ff004f;
+    transform: translateY(-10px);
+}
+
